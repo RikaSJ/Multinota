@@ -10,7 +10,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +17,8 @@ import java.util.List;
 import com.example.phoenix.multinotas.Datos.ActivityDatos;
 import com.example.phoenix.multinotas.Datos.ActivityNotifica;
 import com.example.phoenix.multinotas.Datos.DaoNotas;
-import com.example.phoenix.multinotas.Datos.DaoNotifica;
-import com.example.phoenix.multinotas.Datos.POJO_Alerta_Serial;
-import com.example.phoenix.multinotas.Datos.POJO_Nota;
-import com.example.phoenix.multinotas.Datos.POJO_Nota_Serial;
+import com.example.phoenix.multinotas.Datos.Nota;
+import com.example.phoenix.multinotas.Datos.Nota_Serial;
 import com.example.phoenix.multinotas.Media.ActivityMedia;
 
 public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener{
@@ -47,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
         // list model
-        POJO_Nota[] listModel0 = createDummyListModel_0("tab 0");
-        POJO_Nota[] listModel1 = createDummyListModel_1("tab 1");
+        Nota[] listModel0 = createDummyListModel_0("tab 0");
+        Nota[] listModel1 = createDummyListModel_1("tab 1");
 
         //  ViewPager need a PagerAdapter
         final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), listModel0, listModel1);
@@ -77,8 +74,8 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
         // list model
-        POJO_Nota[] listModel0 = createDummyListModel_0("tab 0");
-        POJO_Nota[] listModel1 = createDummyListModel_1("tab 1");
+        Nota[] listModel0 = createDummyListModel_0("tab 0");
+        Nota[] listModel1 = createDummyListModel_1("tab 1");
 
         //  ViewPager need a PagerAdapter
         final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), listModel0, listModel1);
@@ -141,10 +138,10 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
      * Listener that comunicate fragment / recycler with this activity
      */
     @Override
-    public void onListFragmentInteraction(final POJO_Nota model) {
+    public void onListFragmentInteraction(final Nota model) {
 
         // the user clicked on this item over the list
-        //Toast.makeText(MainActivity.this, POJO_Nota.class.getSimpleName() + ":" + model.getId_nota() + " - " +model.getTipo()+ " - " +model.getTitulo(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(MainActivity.this, Nota.class.getSimpleName() + ":" + model.getId_nota() + " - " +model.getTipo()+ " - " +model.getTitulo(), Toast.LENGTH_LONG).show();
 
 
         String aux[] = new String[]{" "};
@@ -291,17 +288,17 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
 
     // model for NOTA purpose
-    private POJO_Nota[] createDummyListModel_0(String msj) {
+    private Nota[] createDummyListModel_0(String msj) {
 
-        List<POJO_Nota> l = new ArrayList<>();
-        List<POJO_Nota_Serial> ls = new ArrayList<>();
+        List<Nota> l = new ArrayList<>();
+        List<Nota_Serial> ls = new ArrayList<>();
         DaoNotas dao = new DaoNotas(MainActivity.this);
 
         ls=dao.buscarTodos(0);
 
         for(int i = 0;i<ls.size();i++){
 
-            l.add(new POJO_Nota(
+            l.add(new Nota(
                     ls.get(i).getId_nota(),
                     ls.get(i).getTipo(),
                     ls.get(i).getTitulo(),
@@ -314,23 +311,23 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
         }
 
-        return l.toArray(new POJO_Nota[l.size()]);
+        return l.toArray(new Nota[l.size()]);
 
     }
 
 
     // model for TAREA purpose
-    private POJO_Nota[] createDummyListModel_1(String msj) {
+    private Nota[] createDummyListModel_1(String msj) {
 
-        List<POJO_Nota> l = new ArrayList<>();
-        List<POJO_Nota_Serial> ls = new ArrayList<>();
+        List<Nota> l = new ArrayList<>();
+        List<Nota_Serial> ls = new ArrayList<>();
         DaoNotas dao = new DaoNotas(MainActivity.this);
 
         ls=dao.buscarTodos(1);
 
         for(int i = 0;i<ls.size();i++){
 
-            l.add(new POJO_Nota(
+            l.add(new Nota(
                     ls.get(i).getId_nota(),
                     ls.get(i).getTipo(),
                     ls.get(i).getTitulo(),
@@ -343,7 +340,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
         }
 
-        return l.toArray(new POJO_Nota[l.size()]);
+        return l.toArray(new Nota[l.size()]);
 
     }
 
@@ -381,10 +378,10 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
             try {
 
-                POJO_Nota_Serial objNota = (POJO_Nota_Serial) data.getSerializableExtra("miNota");
+                Nota_Serial objNota = (Nota_Serial) data.getSerializableExtra("miNota");
                 DaoNotas dao = new DaoNotas(MainActivity.this);
 
-                if(dao.insert(new POJO_Nota_Serial(0,objNota.getTipo(),objNota.getTitulo(),objNota.getDescripcion(),objNota.getFecha_creacion(),objNota.getFecha_limite(),objNota.getHora_limite(),objNota.getChecalo()))>0) {
+                if(dao.insert(new Nota_Serial(0,objNota.getTipo(),objNota.getTitulo(),objNota.getDescripcion(),objNota.getFecha_creacion(),objNota.getFecha_limite(),objNota.getHora_limite(),objNota.getChecalo()))>0) {
 
                    // Toast.makeText(getBaseContext(), R.string.toast_notaCreada_, Toast.LENGTH_SHORT).show();
                     reiniciarDatos();
@@ -406,10 +403,10 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
             //INSTERTA TAREA;
             try {
 
-                POJO_Nota_Serial objNota = (POJO_Nota_Serial) data.getSerializableExtra("miTarea");
+                Nota_Serial objNota = (Nota_Serial) data.getSerializableExtra("miTarea");
                 DaoNotas dao = new DaoNotas(MainActivity.this);
 
-                if(dao.insert(new POJO_Nota_Serial(0,objNota.getTipo(),objNota.getTitulo(),objNota.getDescripcion(),objNota.getFecha_creacion(),objNota.getFecha_limite(),objNota.getHora_limite(),objNota.getChecalo()))>0) {
+                if(dao.insert(new Nota_Serial(0,objNota.getTipo(),objNota.getTitulo(),objNota.getDescripcion(),objNota.getFecha_creacion(),objNota.getFecha_limite(),objNota.getHora_limite(),objNota.getChecalo()))>0) {
 
                 //    Toast.makeText(getBaseContext(), R.string.toast_tareaCreada, Toast.LENGTH_SHORT).show();
                     reiniciarDatos();
@@ -430,7 +427,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
             try {
 
-                POJO_Nota_Serial objNota = (POJO_Nota_Serial) data.getSerializableExtra("miNotaEdit");
+                Nota_Serial objNota = (Nota_Serial) data.getSerializableExtra("miNotaEdit");
                 DaoNotas dao = new DaoNotas(MainActivity.this);
 
                 if(dao.update(objNota) > 0) {
@@ -454,7 +451,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
             try {
 
-                POJO_Nota_Serial objNota = (POJO_Nota_Serial) data.getSerializableExtra("miTareaEdit");
+                Nota_Serial objNota = (Nota_Serial) data.getSerializableExtra("miTareaEdit");
                 DaoNotas dao = new DaoNotas(MainActivity.this);
 
                 if(dao.update(objNota) > 0) {

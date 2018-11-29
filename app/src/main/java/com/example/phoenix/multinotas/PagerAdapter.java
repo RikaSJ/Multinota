@@ -4,16 +4,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.phoenix.multinotas.Datos.POJO_Nota;
+import com.example.phoenix.multinotas.Datos.Nota;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
     private int numTabs;
-    private POJO_Nota[] dummyModels0;
-    private POJO_Nota[] dummyModels1;
+    private Nota[] dummyModels0;
+    private Nota[] dummyModels1;
 
 
-    public PagerAdapter(FragmentManager fm, int numTabs, POJO_Nota[] dummyModels0, POJO_Nota[] dummyModels1){
+    public PagerAdapter(FragmentManager fm, int numTabs, Nota[] dummyModels0, Nota[] dummyModels1){
 
         super(fm);
         this.numTabs = numTabs;

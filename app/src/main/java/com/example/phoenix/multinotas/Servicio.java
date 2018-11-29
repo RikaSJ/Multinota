@@ -16,8 +16,8 @@ import java.util.List;
 
 import com.example.phoenix.multinotas.Datos.DaoNotas;
 import com.example.phoenix.multinotas.Datos.DaoNotifica;
-import com.example.phoenix.multinotas.Datos.POJO_Alerta_Serial;
-import com.example.phoenix.multinotas.Datos.POJO_Nota_Serial;
+import com.example.phoenix.multinotas.Datos.Alerta;
+import com.example.phoenix.multinotas.Datos.Nota_Serial;
 
 /**
  * Created by jlmgm on 02/12/2017.
@@ -66,7 +66,7 @@ public class Servicio extends Service {
     }
 
 
-    private ArrayList<POJO_Alerta_Serial> listarecordatorios = new ArrayList<>() ;
+    private ArrayList<Alerta> listarecordatorios = new ArrayList<>() ;
     int aux=0;
     public void btnNoti_click(String Titulo,String Descripcion,int indice) {
 
@@ -116,11 +116,11 @@ public class Servicio extends Service {
                     String hora = c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE);
 
 
-                    List<POJO_Alerta_Serial> lista ;
+                    List<Alerta> lista ;
                     lista = dao.buscarTodosDeFecha(fecha);
 
 
-                    POJO_Alerta_Serial alertas = new POJO_Alerta_Serial();
+                    Alerta alertas = new Alerta();
                     alertas.setId_alerta(1);
                     alertas.setId_tarea(1);
                     alertas.setTituloAlerta("Titulo");
@@ -134,14 +134,14 @@ public class Servicio extends Service {
                     for (int i = 0; i < lista.size(); i++) {
                         if (lista.get(i).getHoraAlerta().equalsIgnoreCase(hora) && ((c.get(Calendar.SECOND)) == 0)) {
 
-                            POJO_Alerta_Serial obj = new POJO_Alerta_Serial();
+                            Alerta obj = new Alerta();
                             obj.setId_alerta(lista.get(i).getId_alerta());
                             obj.setFechaAlerta(lista.get(i).getFechaAlerta());
                             obj.setHoraAlerta(lista.get(i).getHoraAlerta());
 
                             listarecordatorios.add(obj);
 
-                            POJO_Nota_Serial nota = new POJO_Nota_Serial();
+                            Nota_Serial nota = new Nota_Serial();
                             nota = daonotas.buscarUno(lista.get(i).getId_tarea());
 
                             if(nota.getTitulo().trim().length()>0 && nota.getDescripcion().trim().length()>0) {

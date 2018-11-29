@@ -7,14 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.phoenix.multinotas.Datos.POJO_Nota;
+import com.example.phoenix.multinotas.Datos.Nota;
 
 public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerViewAdapter.ViewHolder> {
 
-    private final POJO_Nota[] dummyModels;
+    private final Nota[] dummyModels;
     private final ItemFragment.OnListFragmentInteractionListener interactionListener;
 
-    public ItemRecyclerViewAdapter(POJO_Nota[] items, ItemFragment.OnListFragmentInteractionListener listener) {
+    public ItemRecyclerViewAdapter(Nota[] items, ItemFragment.OnListFragmentInteractionListener listener) {
 
         dummyModels = items;
         interactionListener = listener;
@@ -32,7 +32,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
-        POJO_Nota dm = dummyModels[position];
+        Nota dm = dummyModels[position];
         holder.dummyModelItem = dm;
 
         if(dm.getTipo()==0){
@@ -100,7 +100,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
         public final TextView fechaFin;
         public final TextView checa;
 
-        public POJO_Nota dummyModelItem;
+        public Nota dummyModelItem;
 
 
         public ViewHolder(View view) {

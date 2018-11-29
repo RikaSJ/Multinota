@@ -35,7 +35,7 @@ import java.util.Locale;
 
 import com.example.phoenix.multinotas.Datos.ActivityDatos;
 import com.example.phoenix.multinotas.Datos.DaoMedia;
-import com.example.phoenix.multinotas.Datos.POJO_Media_Serial;
+import com.example.phoenix.multinotas.Datos.Media;
 import com.example.phoenix.multinotas.R;
 
 import static android.support.v4.content.FileProvider.getUriForFile;
@@ -73,12 +73,12 @@ public class ActivityMedia extends AppCompatActivity {
 
     public void cargar(){
 
-        List<POJO_Media_Serial> items = new ArrayList<>();
+        List<Media> items = new ArrayList<>();
 
         DaoMedia dao = new DaoMedia(ActivityMedia.this);
         items = dao.buscarTodosDeTarea(tomaID);
 
-        //items.add(new POJO_Media_Serial(R.drawable.nota, 10, "IMAGEN", "LLLL/LLLLLL"));
+        //items.add(new Media(R.drawable.nota, 10, "IMAGEN", "LLLL/LLLLLL"));
 
         // Obtener el Recycler
         //recycler = (RecyclerView) findViewById(R.id.lista_Fotos);
@@ -203,10 +203,10 @@ public class ActivityMedia extends AppCompatActivity {
 
                     try {
 
-                        POJO_Media_Serial objNota = new POJO_Media_Serial(0, tomaID, String.valueOf(mDirAbsoluto), "FOTO");
+                        Media objNota = new Media(0, tomaID, String.valueOf(mDirAbsoluto), "FOTO");
                         DaoMedia dao = new DaoMedia(ActivityMedia.this);
 
-                        if(dao.insert(new POJO_Media_Serial(0,objNota.getId_TareaNota(),objNota.getDir_uri(),objNota.getDescripMedia()))>0) {
+                        if(dao.insert(new Media(0,objNota.getId_TareaNota(),objNota.getDir_uri(),objNota.getDescripMedia()))>0) {
 
                             Toast.makeText(getBaseContext(), "Foto guardada", Toast.LENGTH_SHORT).show();
                             cargar();

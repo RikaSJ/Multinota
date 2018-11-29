@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import com.example.phoenix.multinotas.Datos.POJO_Media_Serial;
+import com.example.phoenix.multinotas.Datos.Media;
 import com.example.phoenix.multinotas.R;
 
 /**
@@ -22,7 +22,7 @@ import com.example.phoenix.multinotas.R;
 
 public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHolder>{
 
-    private List<POJO_Media_Serial> items;
+    private List<Media> items;
 
     private View.OnLongClickListener onLongClickListener;
 
@@ -50,7 +50,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
 
     }
 
-    public MediaAdapter(List<POJO_Media_Serial> items) {
+    public MediaAdapter(List<Media> items) {
         this.items = items;
     }
 

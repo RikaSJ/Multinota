@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.phoenix.multinotas.R;
@@ -26,7 +25,7 @@ public class ActivityNotifica extends AppCompatActivity {
 
     String opc[] = new String[]{"Editar", "Eliminar"};
 
-    private POJO_Alerta_Serial recordatorio;
+    private Alerta recordatorio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,7 @@ public class ActivityNotifica extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                recordatorio = new POJO_Alerta_Serial();
+                recordatorio = new Alerta();
                 recordatorio.setId_alerta(adp.getItem(i).getId_alerta());
                 recordatorio.setId_tarea(adp.getItem(i).getId_tarea());
                 recordatorio.setTituloAlerta(adp.getItem(i).getTituloAlerta());
@@ -65,11 +64,11 @@ public class ActivityNotifica extends AppCompatActivity {
 
     }
 
-    ArrayAdapter<POJO_Alerta_Serial> adp;
+    ArrayAdapter<Alerta> adp;
     public void cargardatos(int ident){
 
         DaoNotifica dao = new DaoNotifica(ActivityNotifica.this);
-        adp = new ArrayAdapter<POJO_Alerta_Serial>(ActivityNotifica.this, android.R.layout.simple_list_item_1,dao.buscarTodosDeTarea(ident));
+        adp = new ArrayAdapter<Alerta>(ActivityNotifica.this, android.R.layout.simple_list_item_1,dao.buscarTodosDeTarea(ident));
         lista.setAdapter(adp);
 
     }
@@ -186,10 +185,10 @@ public class ActivityNotifica extends AppCompatActivity {
 
             try {
 
-                POJO_Alerta_Serial objAlert = (POJO_Alerta_Serial) data.getSerializableExtra("miAlerta");
+                Alerta objAlert = (Alerta) data.getSerializableExtra("miAlerta");
                 DaoNotifica dao = new DaoNotifica(ActivityNotifica.this);
 
-                if(dao.insert(new POJO_Alerta_Serial(0,objAlert.getId_tarea(),objAlert.getTituloAlerta(),objAlert.getDescripcionAlerta(),objAlert.getFechaAlerta(),objAlert.getHoraAlerta()))>0) {
+                if(dao.insert(new Alerta(0,objAlert.getId_tarea(),objAlert.getTituloAlerta(),objAlert.getDescripcionAlerta(),objAlert.getFechaAlerta(),objAlert.getHoraAlerta()))>0) {
 
                     Toast.makeText(getBaseContext(), R.string.toast_alertaCreada, Toast.LENGTH_SHORT).show();
                     cargardatos(tomaID);
@@ -210,7 +209,7 @@ public class ActivityNotifica extends AppCompatActivity {
 
             try {
 
-                POJO_Alerta_Serial objAlert = (POJO_Alerta_Serial) data.getSerializableExtra("miAlertaEdit");
+                Alerta objAlert = (Alerta) data.getSerializableExtra("miAlertaEdit");
                 DaoNotifica dao = new DaoNotifica(ActivityNotifica.this);
 
                 if(dao.update(objAlert)>0) {

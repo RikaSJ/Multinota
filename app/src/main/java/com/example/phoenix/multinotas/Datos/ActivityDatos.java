@@ -3,9 +3,6 @@ package com.example.phoenix.multinotas.Datos;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,8 +14,6 @@ import android.widget.TimePicker;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 
-import java.util.ArrayList;
-import java.util.regex.Pattern;
 import java.util.Calendar;
 
 
@@ -194,7 +189,7 @@ public class ActivityDatos extends AppCompatActivity implements View.OnClickList
             Toast.makeText(ActivityDatos.this,R.string.confirmToast_inNote,Toast.LENGTH_SHORT).show();
 
             Intent atras = new Intent();
-            POJO_Nota_Serial alum = new POJO_Nota_Serial();
+            Nota_Serial alum = new Nota_Serial();
 
             alum.setTipo(0);
             alum.setTitulo(txt_titulo.getText().toString());
@@ -216,7 +211,7 @@ public class ActivityDatos extends AppCompatActivity implements View.OnClickList
             Toast.makeText(ActivityDatos.this,R.string.confirmToast_inTarea,Toast.LENGTH_SHORT).show();
 
             Intent atras = new Intent();
-            POJO_Nota_Serial alum = new POJO_Nota_Serial();
+            Nota_Serial alum = new Nota_Serial();
 
             alum.setTipo(1);
             alum.setTitulo(txt_titulo.getText().toString());
@@ -243,7 +238,7 @@ public class ActivityDatos extends AppCompatActivity implements View.OnClickList
             Toast.makeText(ActivityDatos.this,R.string.confirmToast_editNote,Toast.LENGTH_SHORT).show();
 
             Intent atras = new Intent();
-            POJO_Nota_Serial alum = new POJO_Nota_Serial();
+            Nota_Serial alum = new Nota_Serial();
 
             alum.setId_nota(tomaID);
             alum.setTipo(0);
@@ -267,7 +262,7 @@ public class ActivityDatos extends AppCompatActivity implements View.OnClickList
             Toast.makeText(ActivityDatos.this,R.string.confirmToast_editTarea,Toast.LENGTH_SHORT).show();
 
             Intent atras = new Intent();
-            POJO_Nota_Serial alum = new POJO_Nota_Serial();
+            Nota_Serial alum = new Nota_Serial();
 
             alum.setId_nota(tomaID);
             alum.setTipo(1);
@@ -295,7 +290,7 @@ public class ActivityDatos extends AppCompatActivity implements View.OnClickList
             Toast.makeText(ActivityDatos.this,R.string.confirmToast_inNoti,Toast.LENGTH_SHORT).show();
 
             Intent atras = new Intent();
-            POJO_Alerta_Serial alert = new POJO_Alerta_Serial();
+            Alerta alert = new Alerta();
 
             alert.setId_tarea(tomaID_Alerta_Tarea);
             alert.setTituloAlerta(txt_titulo.getText().toString());
@@ -314,7 +309,7 @@ public class ActivityDatos extends AppCompatActivity implements View.OnClickList
             Toast.makeText(ActivityDatos.this,R.string.confirmToast_editNoti,Toast.LENGTH_SHORT).show();
 
             Intent atras = new Intent();
-            POJO_Alerta_Serial alert = new POJO_Alerta_Serial();
+            Alerta alert = new Alerta();
 
             alert.setId_alerta(tomaID_Alerta);
             alert.setId_tarea(tomaID_Alerta_Tarea);

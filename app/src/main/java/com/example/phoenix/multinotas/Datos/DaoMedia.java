@@ -22,33 +22,33 @@ public class DaoMedia {
     public DaoMedia(Context contexto){
 
         this._contexto = contexto;
-        this._midb = new DBOpenHelper(contexto).getWritableDatabase();
+        this._midb = new NotasBD(contexto).getWritableDatabase();
 
     }
 
     //INSERTAR DATOS;
-    public long insert(POJO_Media_Serial c){
+    public long insert(Media c){
 
         ContentValues cv = new ContentValues();
 
-        cv.put(DBOpenHelper.COLUMNS_MEDIA[1],c.getId_TareaNota());
-        cv.put(DBOpenHelper.COLUMNS_MEDIA[2],c.getDir_uri());
-        cv.put(DBOpenHelper.COLUMNS_MEDIA[3],c.getDescripMedia());
+        cv.put(NotasBD.COLUMNS_MEDIA[1],c.getId_TareaNota());
+        cv.put(NotasBD.COLUMNS_MEDIA[2],c.getDir_uri());
+        cv.put(NotasBD.COLUMNS_MEDIA[3],c.getDescripMedia());
 
-        return _midb.insert(DBOpenHelper.TABLE_MEDIA_NAME,null,cv) ;
+        return _midb.insert(NotasBD.TABLE_MEDIA_NAME,null,cv) ;
 
     }
 
     //ACTUALIZAR DATOS;
-    public long update(POJO_Media_Serial c){
+    public long update(Media c){
 
         ContentValues cv = new ContentValues();
 
-        cv.put(DBOpenHelper.COLUMNS_MEDIA[1],c.getId_TareaNota());
-        cv.put(DBOpenHelper.COLUMNS_MEDIA[2],c.getDir_uri());
-        cv.put(DBOpenHelper.COLUMNS_MEDIA[3],c.getDescripMedia());
+        cv.put(NotasBD.COLUMNS_MEDIA[1],c.getId_TareaNota());
+        cv.put(NotasBD.COLUMNS_MEDIA[2],c.getDir_uri());
+        cv.put(NotasBD.COLUMNS_MEDIA[3],c.getDescripMedia());
 
-        return _midb.update(DBOpenHelper.TABLE_MEDIA_NAME, cv, "_id=?", new String[] { String.valueOf( c.getId_media())});
+        return _midb.update(NotasBD.TABLE_MEDIA_NAME, cv, "_id=?", new String[] { String.valueOf( c.getId_media())});
 
     }
 
@@ -67,9 +67,9 @@ public class DaoMedia {
     }
 
     //CREACION DE LISTA;
-    public List<POJO_Media_Serial> buscarTodos() {
+    public List<Media> buscarTodos() {
 
-        List<POJO_Media_Serial> notesArrayList = new ArrayList<POJO_Media_Serial>();
+        List<Media> notesArrayList = new ArrayList<Media>();
         String selectQuery = "SELECT * FROM media";
         Log.d("", selectQuery);
         SQLiteDatabase db = this._midb;
@@ -79,7 +79,7 @@ public class DaoMedia {
 
             do {
 
-                POJO_Media_Serial notas = new POJO_Media_Serial();
+                Media notas = new Media();
                 notas.setId_media(c.getInt(c.getColumnIndex("_id")));
                 notas.setId_TareaNota(c.getInt(c.getColumnIndex("id_Tarea")));
                 notas.setDir_uri(c.getString(c.getColumnIndex("dirUri")));
@@ -96,9 +96,9 @@ public class DaoMedia {
     }
 
     //BUSQUEDA POR ID TAREA;
-    public List<POJO_Media_Serial> buscarTodosDeTarea(int iden) {
+    public List<Media> buscarTodosDeTarea(int iden) {
 
-        List<POJO_Media_Serial> notesArrayList = new ArrayList<POJO_Media_Serial>();
+        List<Media> notesArrayList = new ArrayList<Media>();
         String selectQuery = "SELECT * FROM media WHERE id_Tarea = '"+iden+"'";
         Log.d("", selectQuery);
         SQLiteDatabase db = this._midb;
@@ -108,7 +108,7 @@ public class DaoMedia {
 
             do {
 
-                POJO_Media_Serial notas = new POJO_Media_Serial();
+                Media notas = new Media();
                 notas.setId_media(c.getInt(c.getColumnIndex("_id")));
                 notas.setId_TareaNota(c.getInt(c.getColumnIndex("id_Tarea")));
                 notas.setDir_uri(c.getString(c.getColumnIndex("dirUri")));
@@ -125,9 +125,9 @@ public class DaoMedia {
     }
 
     //BUSQUEDA POR ID;
-    public POJO_Media_Serial buscarUno(int iden) {
+    public Media buscarUno(int iden) {
 
-        POJO_Media_Serial notesUno = new POJO_Media_Serial();
+        Media notesUno = new Media();
         String selectQuery = "SELECT * FROM media WHERE _id = '"+iden+"'";
         Log.d("", selectQuery);
         SQLiteDatabase db = this._midb;
@@ -137,7 +137,7 @@ public class DaoMedia {
 
             do {
 
-                POJO_Media_Serial notas = new POJO_Media_Serial();
+                Media notas = new Media();
                 notas.setId_media(c.getInt(c.getColumnIndex("_id")));
                 notas.setId_TareaNota(c.getInt(c.getColumnIndex("id_Tarea")));
                 notas.setDir_uri(c.getString(c.getColumnIndex("dirUri")));

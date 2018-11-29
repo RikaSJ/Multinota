@@ -23,41 +23,41 @@ public class DaoNotas {
     public DaoNotas(Context contexto){
 
         this._contexto = contexto;
-        this._midb = new DBOpenHelper(contexto).getWritableDatabase();
+        this._midb = new NotasBD(contexto).getWritableDatabase();
 
     }
 
     //INSERTAR DATOS;
-    public long insert(POJO_Nota_Serial c){
+    public long insert(Nota_Serial c){
 
         ContentValues cv = new ContentValues();
 
-        cv.put(DBOpenHelper.COLUMNS_REGISTROS[1],c.getTipo());
-        cv.put(DBOpenHelper.COLUMNS_REGISTROS[2],c.getTitulo());
-        cv.put(DBOpenHelper.COLUMNS_REGISTROS[3],c.getDescripcion());
-        cv.put(DBOpenHelper.COLUMNS_REGISTROS[4],c.getFecha_creacion());
-        cv.put(DBOpenHelper.COLUMNS_REGISTROS[5],c.getFecha_limite());
-        cv.put(DBOpenHelper.COLUMNS_REGISTROS[6],c.getHora_limite());
-        cv.put(DBOpenHelper.COLUMNS_REGISTROS[7],c.getChecalo());
+        cv.put(NotasBD.COLUMNS_REGISTROS[1],c.getTipo());
+        cv.put(NotasBD.COLUMNS_REGISTROS[2],c.getTitulo());
+        cv.put(NotasBD.COLUMNS_REGISTROS[3],c.getDescripcion());
+        cv.put(NotasBD.COLUMNS_REGISTROS[4],c.getFecha_creacion());
+        cv.put(NotasBD.COLUMNS_REGISTROS[5],c.getFecha_limite());
+        cv.put(NotasBD.COLUMNS_REGISTROS[6],c.getHora_limite());
+        cv.put(NotasBD.COLUMNS_REGISTROS[7],c.getChecalo());
 
-        return _midb.insert(DBOpenHelper.TABLE_REGISTROS_NAME,null,cv) ;
+        return _midb.insert(NotasBD.TABLE_REGISTROS_NAME,null,cv) ;
 
     }
 
     //ACTUALIZAR DATOS;
-    public long update(POJO_Nota_Serial c){
+    public long update(Nota_Serial c){
 
         ContentValues cv = new ContentValues();
 
-        cv.put(DBOpenHelper.COLUMNS_REGISTROS[1],c.getTipo());
-        cv.put(DBOpenHelper.COLUMNS_REGISTROS[2],c.getTitulo());
-        cv.put(DBOpenHelper.COLUMNS_REGISTROS[3],c.getDescripcion());
-        cv.put(DBOpenHelper.COLUMNS_REGISTROS[4],c.getFecha_creacion());
-        cv.put(DBOpenHelper.COLUMNS_REGISTROS[5],c.getFecha_limite());
-        cv.put(DBOpenHelper.COLUMNS_REGISTROS[6],c.getHora_limite());
-        cv.put(DBOpenHelper.COLUMNS_REGISTROS[7],c.getChecalo());
+        cv.put(NotasBD.COLUMNS_REGISTROS[1],c.getTipo());
+        cv.put(NotasBD.COLUMNS_REGISTROS[2],c.getTitulo());
+        cv.put(NotasBD.COLUMNS_REGISTROS[3],c.getDescripcion());
+        cv.put(NotasBD.COLUMNS_REGISTROS[4],c.getFecha_creacion());
+        cv.put(NotasBD.COLUMNS_REGISTROS[5],c.getFecha_limite());
+        cv.put(NotasBD.COLUMNS_REGISTROS[6],c.getHora_limite());
+        cv.put(NotasBD.COLUMNS_REGISTROS[7],c.getChecalo());
 
-        return _midb.update(DBOpenHelper.TABLE_REGISTROS_NAME, cv, "_id=?", new String[] { String.valueOf( c.getId_nota())});
+        return _midb.update(NotasBD.TABLE_REGISTROS_NAME, cv, "_id=?", new String[] { String.valueOf( c.getId_nota())});
 
     }
 
@@ -69,9 +69,9 @@ public class DaoNotas {
     }
 
     //CREACION DE LISATAS;
-    public List<POJO_Nota_Serial> buscarTodos(int tipo) {
+    public List<Nota_Serial> buscarTodos(int tipo) {
 
-        List<POJO_Nota_Serial> notesArrayList = new ArrayList<POJO_Nota_Serial>();
+        List<Nota_Serial> notesArrayList = new ArrayList<Nota_Serial>();
         String selectQuery = "SELECT * FROM registros WHERE tipo = '"+tipo+"'";
         Log.d("", selectQuery);
         SQLiteDatabase db = this._midb;
@@ -81,7 +81,7 @@ public class DaoNotas {
 
             do {
 
-                POJO_Nota_Serial notas = new POJO_Nota_Serial();
+                Nota_Serial notas = new Nota_Serial();
                 notas.setId_nota(c.getInt(c.getColumnIndex("_id")));
                 notas.setTipo(c.getInt(c.getColumnIndex("tipo")));
                 notas.setTitulo(c.getString(c.getColumnIndex("titulo")));
@@ -102,9 +102,9 @@ public class DaoNotas {
     }
 
     //BUSQUEDA POR ID;
-    public POJO_Nota_Serial buscarUno(int iden) {
+    public Nota_Serial buscarUno(int iden) {
 
-        POJO_Nota_Serial notesUno = new POJO_Nota_Serial();
+        Nota_Serial notesUno = new Nota_Serial();
         String selectQuery = "SELECT * FROM registros WHERE _id = '"+iden+"'";
         Log.d("", selectQuery);
         SQLiteDatabase db = this._midb;
@@ -114,7 +114,7 @@ public class DaoNotas {
 
             do {
 
-                POJO_Nota_Serial notas = new POJO_Nota_Serial();
+                Nota_Serial notas = new Nota_Serial();
                 notas.setId_nota(c.getInt(c.getColumnIndex("_id")));
                 notas.setTipo(c.getInt(c.getColumnIndex("tipo")));
                 notas.setTitulo(c.getString(c.getColumnIndex("titulo")));

@@ -23,37 +23,37 @@ public class DaoNotifica {
     public DaoNotifica(Context contexto){
 
         this._contexto = contexto;
-        this._midb = new DBOpenHelper(contexto).getWritableDatabase();
+        this._midb = new NotasBD(contexto).getWritableDatabase();
 
     }
 
     //INSERTAR DATOS;
-    public long insert(POJO_Alerta_Serial c){
+    public long insert(Alerta c){
 
         ContentValues cv = new ContentValues();
 
-        cv.put(DBOpenHelper.COLUMNS_ALERTAS[1],c.getId_tarea());
-        cv.put(DBOpenHelper.COLUMNS_ALERTAS[2],c.getTituloAlerta());
-        cv.put(DBOpenHelper.COLUMNS_ALERTAS[3],c.getDescripcionAlerta());
-        cv.put(DBOpenHelper.COLUMNS_ALERTAS[4],c.getFechaAlerta());
-        cv.put(DBOpenHelper.COLUMNS_ALERTAS[5],c.getHoraAlerta());
+        cv.put(NotasBD.COLUMNS_ALERTAS[1],c.getId_tarea());
+        cv.put(NotasBD.COLUMNS_ALERTAS[2],c.getTituloAlerta());
+        cv.put(NotasBD.COLUMNS_ALERTAS[3],c.getDescripcionAlerta());
+        cv.put(NotasBD.COLUMNS_ALERTAS[4],c.getFechaAlerta());
+        cv.put(NotasBD.COLUMNS_ALERTAS[5],c.getHoraAlerta());
 
-        return _midb.insert(DBOpenHelper.TABLE_ALERTAS_NAME,null,cv) ;
+        return _midb.insert(NotasBD.TABLE_ALERTAS_NAME,null,cv) ;
 
     }
 
     //ACTUALIZAR DATOS;
-    public long update(POJO_Alerta_Serial c){
+    public long update(Alerta c){
 
         ContentValues cv = new ContentValues();
 
-        cv.put(DBOpenHelper.COLUMNS_ALERTAS[1],c.getId_tarea());
-        cv.put(DBOpenHelper.COLUMNS_ALERTAS[2],c.getTituloAlerta());
-        cv.put(DBOpenHelper.COLUMNS_ALERTAS[3],c.getDescripcionAlerta());
-        cv.put(DBOpenHelper.COLUMNS_ALERTAS[4],c.getFechaAlerta());
-        cv.put(DBOpenHelper.COLUMNS_ALERTAS[5],c.getHoraAlerta());
+        cv.put(NotasBD.COLUMNS_ALERTAS[1],c.getId_tarea());
+        cv.put(NotasBD.COLUMNS_ALERTAS[2],c.getTituloAlerta());
+        cv.put(NotasBD.COLUMNS_ALERTAS[3],c.getDescripcionAlerta());
+        cv.put(NotasBD.COLUMNS_ALERTAS[4],c.getFechaAlerta());
+        cv.put(NotasBD.COLUMNS_ALERTAS[5],c.getHoraAlerta());
 
-        return _midb.update(DBOpenHelper.TABLE_ALERTAS_NAME, cv, "_id=?", new String[] { String.valueOf( c.getId_alerta())});
+        return _midb.update(NotasBD.TABLE_ALERTAS_NAME, cv, "_id=?", new String[] { String.valueOf( c.getId_alerta())});
 
     }
 
@@ -72,9 +72,9 @@ public class DaoNotifica {
     }
 
     //CREACION DE LISTA;
-    public List<POJO_Alerta_Serial> buscarTodos() {
+    public List<Alerta> buscarTodos() {
 
-        List<POJO_Alerta_Serial> notesArrayList = new ArrayList<POJO_Alerta_Serial>();
+        List<Alerta> notesArrayList = new ArrayList<Alerta>();
         String selectQuery = "SELECT * FROM alertas";
         Log.d("", selectQuery);
         SQLiteDatabase db = this._midb;
@@ -84,7 +84,7 @@ public class DaoNotifica {
 
             do {
 
-                POJO_Alerta_Serial notas = new POJO_Alerta_Serial();
+                Alerta notas = new Alerta();
                 notas.setId_alerta(c.getInt(c.getColumnIndex("_id")));
                 notas.setId_tarea(c.getInt(c.getColumnIndex("id_Tarea")));
                 notas.setTituloAlerta(c.getString(c.getColumnIndex("titulo")));
@@ -103,9 +103,9 @@ public class DaoNotifica {
     }
 
     //BUSQUEDA POR ID TAREA;
-    public List<POJO_Alerta_Serial> buscarTodosDeTarea(int iden) {
+    public List<Alerta> buscarTodosDeTarea(int iden) {
 
-        List<POJO_Alerta_Serial> notesArrayList = new ArrayList<POJO_Alerta_Serial>();
+        List<Alerta> notesArrayList = new ArrayList<Alerta>();
         String selectQuery = "SELECT * FROM alertas WHERE id_Tarea = '"+iden+"'";
         Log.d("", selectQuery);
         SQLiteDatabase db = this._midb;
@@ -115,7 +115,7 @@ public class DaoNotifica {
 
             do {
 
-                POJO_Alerta_Serial notas = new POJO_Alerta_Serial();
+                Alerta notas = new Alerta();
                 notas.setId_alerta(c.getInt(c.getColumnIndex("_id")));
                 notas.setId_tarea(c.getInt(c.getColumnIndex("id_Tarea")));
                 notas.setTituloAlerta(c.getString(c.getColumnIndex("titulo")));
@@ -134,9 +134,9 @@ public class DaoNotifica {
     }
 
     //BUSQUEDA POR FECHA;
-    public List<POJO_Alerta_Serial> buscarTodosDeFecha(String iden) {
+    public List<Alerta> buscarTodosDeFecha(String iden) {
 
-        List<POJO_Alerta_Serial> notesArrayList = new ArrayList<POJO_Alerta_Serial>();
+        List<Alerta> notesArrayList = new ArrayList<Alerta>();
         String selectQuery = "SELECT * FROM alertas WHERE fechaAlerta = '"+iden+"'";
         Log.d("", selectQuery);
         SQLiteDatabase db = this._midb;
@@ -146,7 +146,7 @@ public class DaoNotifica {
 
             do {
 
-                POJO_Alerta_Serial notas = new POJO_Alerta_Serial();
+                Alerta notas = new Alerta();
                 notas.setId_alerta(c.getInt(c.getColumnIndex("_id")));
                 notas.setId_tarea(c.getInt(c.getColumnIndex("id_Tarea")));
                 notas.setTituloAlerta(c.getString(c.getColumnIndex("titulo")));
@@ -165,9 +165,9 @@ public class DaoNotifica {
     }
 
     //BUSQUEDA POR ID;
-    public POJO_Alerta_Serial buscarUno(int iden) {
+    public Alerta buscarUno(int iden) {
 
-        POJO_Alerta_Serial notesUno = new POJO_Alerta_Serial();
+        Alerta notesUno = new Alerta();
         String selectQuery = "SELECT * FROM alertas WHERE _id = '"+iden+"'";
         Log.d("", selectQuery);
         SQLiteDatabase db = this._midb;
@@ -177,7 +177,7 @@ public class DaoNotifica {
 
             do {
 
-                POJO_Alerta_Serial notas = new POJO_Alerta_Serial();
+                Alerta notas = new Alerta();
                 notas.setId_alerta(c.getInt(c.getColumnIndex("_id")));
                 notas.setId_tarea(c.getInt(c.getColumnIndex("id_Tarea")));
                 notas.setTituloAlerta(c.getString(c.getColumnIndex("titulo")));

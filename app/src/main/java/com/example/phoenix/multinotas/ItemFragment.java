@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.phoenix.multinotas.Datos.POJO_Nota;
+import com.example.phoenix.multinotas.Datos.Nota;
 
 /**
  * A fragment representing a dummyModels of POJO_Nota
@@ -21,7 +21,7 @@ public class ItemFragment extends Fragment {
 
     private static final String KEY_MODEL = "KEY_MODEL";
 
-    private POJO_Nota[] dummyModels;
+    private Nota[] dummyModels;
     private OnListFragmentInteractionListener interactionListener;
 
     public ItemFragment() {
@@ -30,7 +30,7 @@ public class ItemFragment extends Fragment {
     /**
      * Receive the model list
      */
-    public static ItemFragment newInstance(POJO_Nota[] dummyModels) {
+    public static ItemFragment newInstance(Nota[] dummyModels) {
 
         ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
@@ -48,7 +48,7 @@ public class ItemFragment extends Fragment {
             throw new RuntimeException("You must to send a dummyModels ");
         }
 
-        dummyModels = (POJO_Nota[]) getArguments().getParcelableArray(KEY_MODEL);
+        dummyModels = (Nota[]) getArguments().getParcelableArray(KEY_MODEL);
 
     }
 
@@ -95,7 +95,7 @@ public class ItemFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
 
-        void onListFragmentInteraction(POJO_Nota item);
+        void onListFragmentInteraction(Nota item);
 
     }
 
