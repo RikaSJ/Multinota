@@ -1,7 +1,12 @@
 package com.example.phoenix.multinotas.Media;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +37,8 @@ import com.example.phoenix.multinotas.Datos.ActivityDatos;
 import com.example.phoenix.multinotas.Datos.DaoMedia;
 import com.example.phoenix.multinotas.Datos.POJO_Media_Serial;
 import com.example.phoenix.multinotas.R;
+
+import static android.support.v4.content.FileProvider.getUriForFile;
 
 /**
  * Created by jlmgm on 05/12/2017.
@@ -93,45 +100,52 @@ public class ActivityMedia extends AppCompatActivity {
 
 
     private String mDirAbsoluto = null;
-
     private static final int REQUEST_CODE_CAMARA = 1;
     private static final int SCALE_FACTOR_IMAGE_VIEW = 4;
     private static final String ALBUM = "GuardaNotas";
     private static final String EXTENSION_JPEG = ".jpg";
+    final int MY_PERMISSIONS_REQUEST_READ_ESTORAGE=124;
 
     public void btnMedia_click(View v){
-
         Toast.makeText(ActivityMedia.this,"Tomar foto",Toast.LENGTH_SHORT).show();
-
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File file = null;
-
         try {
-
             // Crea el Nombre de la Fotografía
             String fechaHora = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
             String nombre = ALBUM + "_" + fechaHora;
             // Crea el Archivo de la Fotografía
             file = nombrarArchivo(ActivityMedia.this, ALBUM, nombre, EXTENSION_JPEG);
-
             // Obtiene el Nombre y el Directorio Absoluto y los Muestra
-            //textView1.setText("Nombre: " + file.getName());
-            //textView2.setText("Dir. Absoluto: " + file.getAbsolutePath());
-
             // Guarda el Directorio Absoluto en una Variable Global
             mDirAbsoluto = file.getAbsolutePath();
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-
         } catch (IOException e) {
-
             e.printStackTrace();
             file = null;
             mDirAbsoluto = null;
-
         }
+        try {
+            int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+            if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getApplicationContext(), "Hay permiso", Toast.LENGTH_SHORT).show();
+                startActivityForResult(intent, REQUEST_CODE_CAMARA);
+            } else {
+                Toast.makeText(getApplicationContext(), "No hay permiso", Toast.LENGTH_SHORT).show();
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+                    } else {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                                MY_PERMISSIONS_REQUEST_READ_ESTORAGE);
+                    }
 
-        startActivityForResult(intent, REQUEST_CODE_CAMARA);
-
+                }
+            }
+        }catch (Exception ex){
+            Toast.makeText(getApplicationContext(), ex+"", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private File nombrarArchivo(Context context, String album, String nombre, String extension) throws IOException {

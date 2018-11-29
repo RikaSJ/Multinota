@@ -30,15 +30,11 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         cargar();
-
         startService(new Intent(getBaseContext(),Servicio.class));
-
     }
 
     public void cargar(){
-
         // define TabLayout
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(R.string.title_tab0));
@@ -194,18 +190,18 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
                                                 if(dao.delete(model.getId_nota()+"")>0){
 
-                                                    Toast.makeText(getBaseContext(),R.string.del_alert_resultGood,Toast.LENGTH_SHORT).show();
+                                                    //Toast.makeText(getBaseContext(),R.string.del_alert_resultGood,Toast.LENGTH_SHORT).show();
                                                     reiniciarDatos();
 
                                                 }else{
 
-                                                    Toast.makeText(getBaseContext(),R.string.del_alert_resultBad,Toast.LENGTH_SHORT).show();
+                                                    //Toast.makeText(getBaseContext(),R.string.del_alert_resultBad,Toast.LENGTH_SHORT).show();
 
                                                 }
 
                                             }catch (Exception err){
 
-                                                Toast.makeText(getBaseContext(),err.getMessage(),Toast.LENGTH_LONG).show();
+                                                //Toast.makeText(getBaseContext(),err.getMessage(),Toast.LENGTH_LONG).show();
 
                                             }
 
@@ -358,14 +354,14 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     public void btnCheckList_click(View v){
 
         if(tabFlag.equals("0")){
-            Toast.makeText(MainActivity.this,R.string.toast_creaNota,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this,R.string.toast_creaNota,Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(getApplication(),ActivityDatos.class);
             intent.putExtra("tipo_integer", 0);
 
             startActivityForResult(intent,1000);
         }else if(tabFlag.equals("1")){
-            Toast.makeText(MainActivity.this,R.string.toast_creaTarea,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this,R.string.toast_creaTarea,Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(getApplication(),ActivityDatos.class);
             intent.putExtra("tipo_integer", 1);
@@ -390,18 +386,18 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
                 if(dao.insert(new POJO_Nota_Serial(0,objNota.getTipo(),objNota.getTitulo(),objNota.getDescripcion(),objNota.getFecha_creacion(),objNota.getFecha_limite(),objNota.getHora_limite(),objNota.getChecalo()))>0) {
 
-                    Toast.makeText(getBaseContext(), R.string.toast_notaCreada_, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getBaseContext(), R.string.toast_notaCreada_, Toast.LENGTH_SHORT).show();
                     reiniciarDatos();
 
                 }else{
 
-                    Toast.makeText(getBaseContext(), R.string.toast_notaCreadaProblem_, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getBaseContext(), R.string.toast_notaCreadaProblem_, Toast.LENGTH_SHORT).show();
 
                 }
 
             }catch (Exception err){
 
-                Toast.makeText(getBaseContext(),err.getMessage(),Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getBaseContext(),err.getMessage(),Toast.LENGTH_LONG).show();
 
             }
 
@@ -415,18 +411,18 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
                 if(dao.insert(new POJO_Nota_Serial(0,objNota.getTipo(),objNota.getTitulo(),objNota.getDescripcion(),objNota.getFecha_creacion(),objNota.getFecha_limite(),objNota.getHora_limite(),objNota.getChecalo()))>0) {
 
-                    Toast.makeText(getBaseContext(), R.string.toast_tareaCreada, Toast.LENGTH_SHORT).show();
+                //    Toast.makeText(getBaseContext(), R.string.toast_tareaCreada, Toast.LENGTH_SHORT).show();
                     reiniciarDatos();
 
                 }else{
 
-                    Toast.makeText(getBaseContext(), R.string.toast_tareaCreadaProblem, Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(getBaseContext(), R.string.toast_tareaCreadaProblem, Toast.LENGTH_SHORT).show();
 
                 }
 
             }catch (Exception err){
 
-                Toast.makeText(getBaseContext(),err.getMessage(),Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getBaseContext(),err.getMessage(),Toast.LENGTH_LONG).show();
 
             }
 
@@ -439,18 +435,18 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
                 if(dao.update(objNota) > 0) {
 
-                    Toast.makeText(getBaseContext(), R.string.toast_notaEditada, Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(getBaseContext(), R.string.toast_notaEditada, Toast.LENGTH_SHORT).show();
                     reiniciarDatos();
 
                 }else{
 
-                    Toast.makeText(getBaseContext(), R.string.toast_notaEditadaProblem, Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(getBaseContext(), R.string.toast_notaEditadaProblem, Toast.LENGTH_SHORT).show();
 
                 }
 
             }catch (Exception err){
 
-                Toast.makeText(getBaseContext(),err.getMessage(),Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getBaseContext(),err.getMessage(),Toast.LENGTH_LONG).show();
 
             }
 
@@ -463,18 +459,18 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
                 if(dao.update(objNota) > 0) {
 
-                    Toast.makeText(getBaseContext(), R.string.toast_tareaEditada, Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(getBaseContext(), R.string.toast_tareaEditada, Toast.LENGTH_SHORT).show();
                     reiniciarDatos();
 
                 }else{
 
-                    Toast.makeText(getBaseContext(), R.string.toast_tareaEditadaProblem, Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(getBaseContext(), R.string.toast_tareaEditadaProblem, Toast.LENGTH_SHORT).show();
 
                 }
 
             }catch (Exception err){
 
-                Toast.makeText(getBaseContext(),err.getMessage(),Toast.LENGTH_LONG).show();
+            //    Toast.makeText(getBaseContext(),err.getMessage(),Toast.LENGTH_LONG).show();
 
             }
 
